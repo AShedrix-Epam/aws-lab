@@ -1,0 +1,17 @@
+---
+- name: Install Apache
+  yum:
+    name: httpd
+
+- name: httpd should be enamled
+  service:
+    name: httpd
+    state: started
+    enabled: yes
+
+- name: Copy script connection
+  template:
+    src: index.php.j2
+    dest: /var/www/html/index.php
+  notify: httpd restarted
+ 
